@@ -1,0 +1,39 @@
+{% extends 'layouts/admin.html' %}
+{% block header %}Панель разработчика{% endblock %}
+{% block description %}Developer{% endblock %}
+{% block breadcrumbs %}
+    <li class="active">Панель разработчика</li>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="h3 box-title">Удаление</div>
+                </div>
+                <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Описание</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            Удалить все товары
+                        </td>
+                        <td>
+                            <a href="/') }}" onclick="return confirm('Вы уверены?')" class="btn btn-danger btn-flat"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script src="https://api-maps.yandex.ru/2.1/?load=package.full&apikey=4d16304f-12ba-4134-ac9b-f0da5028a1f4&lang=ru_RU" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+{% endblock %}

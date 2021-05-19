@@ -1,0 +1,85 @@
+{% extends 'layouts/admin.html' %}
+{% block header %}Dashboard{% endblock %}
+{% block description %}Элитный алкоголь{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Статистика</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-orange"><i class="fa fas fa-clipboard-list"></i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Заказов за сегодня</span>
+                                    <span class="info-box-number">{{ today_orders }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="info-box">
+                                <div class="info-box-icon bg-orange"><i class="fa fas fa-clipboard-list"></i></div>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Заказов за вчерашний день</span>
+                                    <span class="info-box-number">{{ yesterday_orders }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="info-box">
+                                <div class="info-box-icon bg-orange"><i class="fa fas fa-users"></i></div>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Клиентов за сегодня</span>
+                                    <span class="info-box-number">{{ today_users }}</span></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="info-box">
+                                <div class="info-box-icon bg-orange"><i class="fa fas fa-users"></i></div>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Клиентов за вчерашний день</span>
+                                    <span class="info-box-number">{{ yesterday_users }}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Уведомления о поставках</h3>
+                </div>
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Кол-во</th>
+                                <th>Название</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for dish in get_dish_count %}
+                                {% if dish.quantity <= 5 %}
+                                    <tr>
+                                        <td>
+                                            <input type="text" size="3" min="0" readonly="true" value="{{ dish.quantity }}">                                  
+                                        </td>
+                                        <td>
+                                            {{ dish.name }}
+                                        </td>
+                                        <td>
+                                            <a href="/catalog/dish/{{ dish.id }}" class="btn btn-flat bg-orange"><i class="fas fa-edit"></i></a>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

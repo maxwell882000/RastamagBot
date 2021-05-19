@@ -1,0 +1,54 @@
+{% extends 'layouts/admin.html' %}
+{% block header %}Рассылка{% endblock %}
+{% block breadcrumbs %}
+    <li class="active">Рассылка</li>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="h3 box-title">Заполните все поля</div>
+                </div>
+                <div class="box-body">
+                    <form action="{{ url_for('admin.mailing') }}" method="post" enctype="multipart/form-data">
+                        {{ mail_form.hidden_tag() }}
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group {% if mail_form.mail.errors|length > 0 %}has_error{% endif %}">
+                                {{ mail_form.mail.label }}
+                                {{ mail_form.mail(class='form-control', placeholder='Введите текст для рассылки') }}
+                                {% for error in mail_form.mail.errors %}
+                                <span class="help-block">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="form-group">
+                            <input type="file" name="image">
+                            * В названии изображения не должно быть пробелов.
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                {{ mail_form.preview }} {{ mail_form.preview.label.text }}
+                            </label>
+                        </div>
+                    <div class="form-group">
+                            {{ mail_form.submit(class='btn btn-flat bg-orange') }}
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+{% endblock %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/catalog.js') }}"></script>
+{% endblock %}
+
+
+
+
+
